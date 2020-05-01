@@ -14,6 +14,7 @@ class DatabaseConfig:
     DB_NAME = config.get('database', 'name')
     DB_USER = config.get('database', 'user')
     DB_PASS = config.get('database', 'pass')
+    DB_OVERRIDE_URL = config.get('database', 'url_override') or None
 
 
 class FlaskConfig:

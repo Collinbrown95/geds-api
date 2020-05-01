@@ -5,7 +5,8 @@ from flask import Blueprint
 from .main.controllers.auth import api as auth_ns
 from .main.controllers.client import api as client_ns
 from .main.controllers.employee import api as employee_ns
-# from .main.controllers.employee import api as employee_ns
+from .main.controllers.organization import api as organization_ns
+from .main.controllers.department import api as department_ns
 
 
 blueprint = Blueprint('api/v1', __name__)
@@ -28,5 +29,5 @@ api = Api(blueprint,
 api.add_namespace(auth_ns)
 api.add_namespace(client_ns, path='/api/v1/client')
 api.add_namespace(employee_ns, path="/api/v1/employees")
-# api.add_namespace(organization_ns, path="/api/v1/employees")
-# api.add_namespace(department_ns, path="/api/v1/employees")
+api.add_namespace(organization_ns, path="/api/v1/organizations")
+api.add_namespace(department_ns, path="/api/v1/departments")

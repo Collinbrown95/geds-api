@@ -40,9 +40,9 @@ class EmployeeDto:
         'city_en': fields.String(required=False, description="The employee's city in English"),
         'city_fr': fields.String(required=False, description="The employee's city in French"),
         'postal_code': fields.String(required=False, description="The employee's postal code"),
-        'org_id': fields.String(required=True, description="The id of the organization the employee works in ",
+        'org_id': fields.String(required=True, description="The id of the organization the employee works in "
                                                            "(foreign key for organizations table)"),
-        'dept_id': fields.String(required=False, description="The id of the department where the employee works ",
+        'dept_id': fields.String(required=False, description="The id of the department where the employee works "
                                                            "(foreign key for departments table)"),
     })
 
@@ -52,21 +52,21 @@ class OrganizationDto:
         'org_id': fields.Integer(required=True, description="The primary key for the organizations table"),
         'org_name_en': fields.String(required=True, description="The organization's name in English"),
         'org_name_fr': fields.String(required=True, description="The organization's name in French"),
-        'dept_id': fields.String(required=False, description="The id of the department that the organization is in ",
+        'dept_id': fields.String(required=False, description="The id of the department that the organization is in "
                                                              "(foreign key for departments table)"),
-        'org_chart_path': fields.String(required=True, description="A serialized array (list) containing the traversal ",
-            "path to get from the root node of the department to the orgainzation unit. Example [0, 0, 4, 3, 1] specifies ",
+        'org_chart_path': fields.String(required=True, description="A serialized array (list) containing the traversal "
+            "path to get from the root node of the department to the orgainzation unit. Example [0, 0, 4, 3, 1] specifies "
             "a series of index positions required to arrive at a node from its department root."),
     })
 
 class DepartmentDto:
-    api = Namespace('organization', description="Organization related operations")
-    department = api.model('organization', {
+    api = Namespace('department', description="Organization related operations")
+    department = api.model('department', {
         'dept_id': fields.String(required=False, description="The id of the department that the organization is in"),
-        'department_en': fields.String(required=True, description="The organization's name in English"),
-        'department_fr': fields.String(required=True, description="The organization's name in French"),
-        'org_chart_en': fields.String(required=True, description="A serialized json (dict) containing all of the organizations ",
+        'department_en': fields.String(required=True, description="The department's name in English"),
+        'department_fr': fields.String(required=True, description="The department's name in French"),
+        'org_chart_en': fields.String(required=True, description="A serialized json (dict) containing all of the organizations "
                                                                   "in this department in English"),
-        'org_chart_fr': fields.String(required=True, description="A serialized json (dict) containing all of the organizations ",
+        'org_chart_fr': fields.String(required=True, description="A serialized json (dict) containing all of the organizations "
                                                                   "in this department in French"),
     })

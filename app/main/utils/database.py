@@ -9,6 +9,9 @@ def assemble_sqlalchemy_url(db_config):
     Returns:
         A string containing the assembled database url.
     '''
+    # If developer manually entered URL, just return the override url.
+    if db_config.DB_OVERRIDE_URL:
+        return db_config.DB_OVERRIDE_URL
     # Unpacking config variables for readability
     dialect = db_config.DB_DIALECT
     user = db_config.DB_USER

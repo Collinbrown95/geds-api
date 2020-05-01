@@ -11,8 +11,8 @@ def get_employee_by_id(user_id):
     Returns:
         An instance of the User model.
     '''
-    return Employee.query.filter_by(id=user_id).first()
+    return Employee.query.filter_by(employee_id=user_id).first()
 
-def get_all_employees():
-    ''' Gets all users in the users table. '''
-    return [employee.json() for employee in Employee.query.all()]
+def get_employees_in_organization(organization_id):
+    ''' Gets all employees who belong to a particular organizational unit. '''
+    return [employee.json() for employee in Employee.query.filter_by(org_id=organization_id)]

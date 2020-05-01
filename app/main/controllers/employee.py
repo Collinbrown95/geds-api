@@ -1,9 +1,9 @@
-from flask import request
+from flask import request, abort
 from flask_restx import Resource
 
 from ..utils.dto import EmployeeDto
 from ..services.employee_service import (get_employee_by_id,
-                                         get_all_employees)
+                                         get_employees_in_organization)
 
 from ..models.employee import Employee as EmployeeModel
 
