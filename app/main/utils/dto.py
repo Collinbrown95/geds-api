@@ -34,6 +34,7 @@ employee_model = {
     'province': fields.String(required=False, description="The employee's province."),
     'city': fields.String(required=False, description="The employee's city."),
     'postal_code': fields.String(required=False, description="The employee's postal code"),
+    'org_name': fields.String(required=False, description="Organization name"),
     'org_id': fields.String(required=True, description="The id of the organization the employee works in "
                                                         "(foreign key for organizations table)"),
     'dept_id': fields.String(required=False, description="The id of the department where the employee works "

@@ -18,12 +18,11 @@ class Organization(db.Model):
         self.dept_id = dept_id
         self.org_chart_path = org_chart_path
 
-    def json(self):
+    def json(self, lang):
         ''' Creates a JSON representation of the current instance of User. '''
         return {
             'org_id': self.org_id,
-            'org_name_en': self.org_name_en,
-            'org_name_fr': self.org_name_fr,
+            'org_name': self.org_name_en if lang == "en" else self.org_name_fr,
             'dept_id': self.dept_id,
             'org_chart_path': self.org_chart_path,
         }

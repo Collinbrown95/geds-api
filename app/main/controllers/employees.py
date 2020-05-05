@@ -2,7 +2,7 @@ from flask import request, abort
 from flask_restx import Resource
 
 from ..utils.dto import EmployeesDto
-from ..services.employee_service import get_employees_in_organization
+from ..services.employee_service import get_employees_in_organization_2
 
 api = EmployeesDto.api
 _employees = EmployeesDto.employees
@@ -19,6 +19,6 @@ class EmployeesByOrganization(Resource):
     @api.marshal_with(_employees, 200)
     def get(self, organization_id):
         lang = request.args["lang"] or "en"  # For now, default to english if no language specified.
-        if get_employees_in_organization(organization_id, lang):
-            return get_employees_in_organization(organization_id, lang)
+        if get_employees_in_organization_2(organization_id, lang):
+            return get_employees_in_organization_2(organization_id, lang)
         return abort(401, "Employee not found.")
