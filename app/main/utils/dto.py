@@ -23,35 +23,38 @@ class ClientDto:
     })
 
 
+employee_model = {
+    'employee_id': fields.Integer(required=True, description="The primary key for the employees table"),
+    'first_name': fields.String(required=True, description="The employee's first name"),
+    'last_name': fields.String(required=True, description="The employee's last name"),
+    'job_title': fields.String(required=True, description="The employee's job title."),
+    'phone_number': fields.String(required=False, description="The employee's phone number"),
+    'email': fields.String(required=False, description="The employee's email"),
+    'address': fields.String(required=False, description="The employee's address."),
+    'province': fields.String(required=False, description="The employee's province."),
+    'city': fields.String(required=False, description="The employee's city."),
+    'postal_code': fields.String(required=False, description="The employee's postal code"),
+    'org_id': fields.String(required=True, description="The id of the organization the employee works in "
+                                                        "(foreign key for organizations table)"),
+    'dept_id': fields.String(required=False, description="The id of the department where the employee works "
+                                                        "(foreign key for departments table)"),
+}
+
 class EmployeeDto:
-    api = Namespace('employee', description="Employee related operations")
-    employee = api.model('employee', {
-        'employee_id': fields.Integer(required=True, description="The primary key for the employees table"),
-        'first_name': fields.String(required=True, description="The employee's first name"),
-        'last_name': fields.String(required=True, description="The employee's last name"),
-        'job_title_en': fields.String(required=True, description="The employee's job title in English"),
-        'job_title_fr': fields.String(required=True, description="The employee's job title in French"),
-        'phone_number': fields.String(required=False, description="The employee's phone number"),
-        'email': fields.String(required=False, description="The employee's email"),
-        'address_en': fields.String(required=False, description="The employee's address in English"),
-        'address_fr': fields.String(required=False, description="The employee's address in French"),
-        'province_en': fields.String(required=False, description="The employee's province in English"),
-        'province_fr': fields.String(required=False, description="The employee's province in French"),
-        'city_en': fields.String(required=False, description="The employee's city in English"),
-        'city_fr': fields.String(required=False, description="The employee's city in French"),
-        'postal_code': fields.String(required=False, description="The employee's postal code"),
-        'org_id': fields.String(required=True, description="The id of the organization the employee works in "
-                                                           "(foreign key for organizations table)"),
-        'dept_id': fields.String(required=False, description="The id of the department where the employee works "
-                                                           "(foreign key for departments table)"),
-    })
+    api = Namespace('employee', description="Operations on a single employee.")
+    employee = api.model('employee', employee_model)
+
+
+class EmployeesDto:
+    api = Namespace('employees', description="Operations on a list of employees, by organization/business unit.")
+    employees = api.model('employees', employee_model)
+
 
 class OrganizationDto:
     api = Namespace('organization', description="Organization related operations")
     organization = api.model('organization', {
         'org_id': fields.Integer(required=True, description="The primary key for the organizations table"),
-        'org_name_en': fields.String(required=True, description="The organization's name in English"),
-        'org_name_fr': fields.String(required=True, description="The organization's name in French"),
+        'org_name': fields.String(required=True, description="The organization's name."),
         'dept_id': fields.String(required=False, description="The id of the department that the organization is in "
                                                              "(foreign key for departments table)"),
         'org_chart_path': fields.String(required=True, description="A serialized array (list) containing the traversal "
@@ -59,14 +62,20 @@ class OrganizationDto:
             "a series of index positions required to arrive at a node from its department root."),
     })
 
+
 class DepartmentDto:
-    api = Namespace('department', description="Organization related operations")
+    api = Namespace('department', description="Organization charts by department ID.")
     department = api.model('department', {
         'dept_id': fields.String(required=False, description="The id of the department that the organization is in"),
-        'department_en': fields.String(required=True, description="The department's name in English"),
-        'department_fr': fields.String(required=True, description="The department's name in French"),
-        'org_chart_en': fields.String(required=True, description="A serialized json (dict) containing all of the organizations "
-                                                                  "in this department in English"),
-        'org_chart_fr': fields.String(required=True, description="A serialized json (dict) containing all of the organizations "
-                                                                  "in this department in French"),
+        'department_name': fields.String(required=True, description="The department's name."),
+        'org_chart': fields.String(required=True, description="A serialized json (dict) containing all of the "
+                                                              "organizations in the department."),
+    })
+
+
+class DepartmentsDto:
+    api = Namespace('departments', description="List of departments and department IDs.")
+    department_list = api.model('department_list', {
+        'dept_id': fields.String(required=True, description="The id of the department that the organization is in"),
+        'department_name': fields.String(required=True, description="The department's name."),
     })

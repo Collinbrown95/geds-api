@@ -2,6 +2,7 @@ from flask import Flask
 from flask_script import Manager
 from mongoengine import connect
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 from .config import FlaskConfig, DatabaseConfig
 
@@ -32,6 +33,7 @@ def create_app():
     
     # Initialize JWT authorization
     JWTManager(app)
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
     return app
 
 

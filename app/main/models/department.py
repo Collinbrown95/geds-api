@@ -18,14 +18,19 @@ class Department(db.Model):
         self.org_chart_en = org_chart_en
         self.org_chart_fr = org_chart_fr
 
-    def json(self):
-        ''' Creates a JSON representation of the current instance of User. '''
+    def json(self, lang):
+        '''
+        Creates a JSON representation of the current instance of Department for
+        a given language.
+        Args:
+            lang: "en" or "fr"
+        Returns:
+            A python dict containing the values for the department being searched.
+        '''
         return {
-            'dept_id': self.org_id,
-            'department_en': self.department_en,
-            'department_fr': self.department_fr,
-            'org_chart_en': self.org_chart_en,
-            'org_chart_fr': self.org_chart_fr,
+            'dept_id': self.dept_id,
+            'department_name': self.department_en if lang == "en" else self.department_fr,
+            'org_chart': self.org_chart_en if lang == "en" else self.org_chart_fr,
         }
     
     def save_to_db(self):

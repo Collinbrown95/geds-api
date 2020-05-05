@@ -42,22 +42,24 @@ class Employee(db.Model):
         self.org_id = org_id
         self.dept_id = dept_id
 
-    def json(self):
-        ''' Creates a JSON representation of the current instance of User. '''
+    def json(self, lang):
+        '''
+        Creates a JSON representation of the current instance of User.
+        Args:
+            lang: "en" or "fr".
+        Returns:
+            A python dict with employee information.
+        '''
         return {
             'employee_id': self.employee_id,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'job_title_en': self.job_title_en,
-            'job_title_fr': self.job_title_fr,
+            'job_title': self.job_title_en if lang == "en" else self.job_title_fr,
             'phone_number': self.phone_number,
             'email': self.email,
-            'address_en': self.address_en,
-            'address_fr': self.address_fr,
-            'province_en': self.province_en,
-            'province_fr': self.province_fr,
-            'city_en': self.city_en,
-            'city_fr': self.city_fr,
+            'address': self.address_en if lang == "en" else self.address_fr,
+            'province': self.province_en if lang == "en" else self.province_fr,
+            'city': self.city_en if lang == "en" else self.city_fr,
             'postal_code': self.postal_code,
             'org_id': self.org_id,
             'dept_id': self.dept_id,
