@@ -33,5 +33,5 @@ def get_employees_in_organization_2(organization_id, lang="en"):
     results = []
     for employee, org in temp:
         results.append({**employee, **org})
-    print("results are ", results)
+    # print("results are ", results)
     return results
